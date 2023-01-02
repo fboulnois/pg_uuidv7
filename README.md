@@ -23,6 +23,16 @@ include 74 random bits which means [billions can be created every second](https:
 without collisions. Because of their structure they are globally sortable and
 can be created in parallel in a distributed system.
 
+## Quickstart
+
+1. Download the [latest `.tar.gz` release](https://github.com/fboulnois/pg_uuidv7/releases)
+and extract it to a temporary directory
+2. Copy `pg_uuidv7.so` into the Postgres module directory
+3. Copy `pg_uuidv7.control` and `pg_uuidv7--1.0.sql` into the Postgres extension
+directory
+4. Add `pg_uuidv7` to the `shared_preload_libraries` setting in `postgresql.conf`
+5. Enable the extension in the database using `CREATE EXTENSION pg_uuidv7;`
+
 ## Build
 
 ### Build locally
