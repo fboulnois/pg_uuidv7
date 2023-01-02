@@ -36,6 +36,8 @@ To build the code run `make`.
 ### Build using Docker
 
 A [`Dockerfile`](Dockerfile) is available to build the code using the official
-Postgres Docker image.
+Postgres Docker image:
 
-To build the code run `docker build . --tag pg_uuidv7`.
+```sh
+docker build . --tag pg_uuidv7
+```
