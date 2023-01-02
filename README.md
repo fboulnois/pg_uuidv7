@@ -19,9 +19,9 @@ SELECT uuid_generate_v7();
 
 Version 7 UUIDs have a few advantages. They include a 48-bit Unix timestamp with
 millisecond accuracy and will overflow far in the future (10899 AD). They also
-include 74 random bits which means billions can be created every second without
-collisions. Because of their structure they are globally sortable and can be
-created in parallel in a distributed system.
+include 74 random bits which means [billions can be created every second](https://en.wikipedia.org/wiki/Birthday_problem#Probability_table)
+without collisions. Because of their structure they are globally sortable and
+can be created in parallel in a distributed system.
 
 ## Build
 
