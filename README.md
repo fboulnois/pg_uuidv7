@@ -33,6 +33,18 @@ directory
 4. Add `pg_uuidv7` to the `shared_preload_libraries` setting in `postgresql.conf`
 5. Enable the extension in the database using `CREATE EXTENSION pg_uuidv7;`
 
+```sh
+# example shell script to install pg_uuidv7
+cd "$(mktemp -d)"
+curl -LO "https://github.com/fboulnois/pg_uuidv7/releases/download/v1.0.0/{pg_uuidv7.tar.gz,SHA256SUMS}"
+tar xf pg_uuidv7.tar.gz
+sha256sum -c SHA256SUMS
+cp pg_uuidv7.so "$(pg_config --pkglibdir)"
+cp pg_uuidv7--1.0.sql pg_uuidv7.control "$(pg_config --sharedir)/extension"
+pg_conftool set shared_preload_libraries "pg_uuidv7"
+psql -c "CREATE EXTENSION pg_uuidv7;"
+```
+
 ## Build
 
 ### Build locally
