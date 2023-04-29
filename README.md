@@ -15,6 +15,9 @@ SELECT uuid_generate_v7();
 (1 row)
 ```
 
+This extension is nearly as fast as the native `gen_random_uuid()` function.
+See the [benchmarks](BENCHMARKS.md) for more details.
+
 ## Background
 
 Version 7 UUIDs have a few advantages. They include a 48-bit Unix timestamp with
