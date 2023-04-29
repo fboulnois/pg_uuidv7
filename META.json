@@ -1,0 +1,35 @@
+{
+  "name": "pg_uuidv7",
+  "abstract": "Create UUIDv7 values in Postgres",
+  "version": "1.0.0",
+  "maintainer": "fboulnois <fboulnois@users.noreply.github.com>",
+  "license": "open_source",
+  "provides": {
+    "pg_uuidv7": {
+      "abstract": "Create UUIDv7 values in Postgres",
+      "file": "pg_uuidv7--1.0.sql",
+      "docfile": "README.md",
+      "version": "1.0.0"
+    }
+  },
+  "resources": {
+    "homepage": "https://github.com/fboulnois/pg_uuidv7",
+    "bugtracker": {
+      "web": "https://github.com/fboulnois/pg_uuidv7/issues"
+    },
+    "repository": {
+      "url": "git://github.com/fboulnois/pg_uuidv7.git",
+      "web": "https://github.com/fboulnois/pg_uuidv7",
+      "type": "git"
+    }
+  },
+  "meta-spec": {
+    "version": "1.0.0",
+    "url": "https://pgxn.org/meta/spec.txt"
+  },
+  "tags": [
+    "uuid",
+    "uuid-generator",
+    "uuidv7"
+ ]
+}
