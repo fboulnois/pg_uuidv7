@@ -42,4 +42,4 @@ jobs:
       - name: Build the extension bundle
         run: pgxn-bundle
       - name: Publish the extension to PGXN
-        run: echo release
+        run: pgxn-release
