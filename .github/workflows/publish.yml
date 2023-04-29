@@ -1,0 +1,45 @@
+name: Publish
+on:
+  push:
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+'
+  workflow_dispatch:
+    inputs:
+      git_tag:
+        required: true
+        type: string
+env:
+  GIT_TAG: ${{ github.event.inputs.git_tag || github.ref_name }}
+jobs:
+  test:
+    strategy:
+      matrix:
+        pg: [15, 14, 13]
+    runs-on: ubuntu-latest
+    container: pgxn/pgxn-tools
+    steps:
+      - name: Initialize each Postgres version
+        run: pg-start ${{ matrix.pg }}
+      - name: Checkout specified tag
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ env.GIT_TAG }}
+      - name: Test and build extension for Postgres
+        run: pg-build-test
+  publish:
+    needs: test
+    runs-on: ubuntu-latest
+    container:
+      image: pgxn/pgxn-tools
+      env:
+        PGXN_USERNAME: ${{ secrets.PGXN_USERNAME }}
+        PGXN_PASSWORD: ${{ secrets.PGXN_PASSWORD }}
+    steps:
+      - name: Checkout specified tag
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ env.GIT_TAG }}
+      - name: Build the extension bundle
+        run: pgxn-bundle
+      - name: Publish the extension to PGXN
+        run: echo release
