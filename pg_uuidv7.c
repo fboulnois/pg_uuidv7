@@ -29,9 +29,9 @@ Datum uuid_generate_v7(PG_FUNCTION_ARGS)
 				(errcode(ERRCODE_INTERNAL_ERROR),
 				 errmsg("could not get CLOCK_REALTIME")));
 
-	memset(uuid->data, 0, 6);
 	tms = ((uint64_t)ts.tv_sec * 1000) + ((uint64_t)ts.tv_nsec / 1000000);
-	*((uint64_t *)(uuid->data)) |= pg_hton64(tms << 16);
+	tms = pg_hton64(tms << 16);
+	memcpy(&uuid->data[0], &tms, 6);
 
 	/*
 	 * Set magic numbers for a "version 7" UUID, see
