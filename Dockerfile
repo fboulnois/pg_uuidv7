@@ -8,5 +8,5 @@ COPY . /srv
 
 RUN make
 
-RUN tar -czvf pg_uuidv7.tar.gz pg_uuidv7--1.0.sql pg_uuidv7.control pg_uuidv7.so \
-  && sha256sum pg_uuidv7--1.0.sql pg_uuidv7.control pg_uuidv7.so pg_uuidv7.tar.gz > SHA256SUMS
+RUN tar -czvf pg_uuidv7.tar.gz pg_uuidv7--1.1.sql pg_uuidv7.control pg_uuidv7.so \
+  && sha256sum pg_uuidv7--1.1.sql pg_uuidv7.control pg_uuidv7.so pg_uuidv7.tar.gz > SHA256SUMS
