@@ -3,8 +3,14 @@
 #include "fmgr.h"
 #include "port/pg_bswap.h"
 #include "utils/uuid.h"
+#include "utils/timestamp.h"
 
 #include <time.h>
+
+/*
+ * Number of milliseconds between unix and postgres epoch
+ */
+#define EPOCH_DIFF_MS ((POSTGRES_EPOCH_JDATE - UNIX_EPOCH_JDATE) * USECS_PER_DAY / 1000)
 
 PG_MODULE_MAGIC;
 
@@ -41,4 +47,18 @@ Datum uuid_generate_v7(PG_FUNCTION_ARGS)
 	uuid->data[8] = (uuid->data[8] & 0x3f) | 0x80; /* 2 bit variant [10]   */
 
 	PG_RETURN_UUID_P(uuid);
+}
+
+PG_FUNCTION_INFO_V1(uuid_v7_to_timestamptz);
+
+Datum uuid_v7_to_timestamptz(PG_FUNCTION_ARGS)
+{
+	pg_uuid_t *uuid = PG_GETARG_UUID_P(0);
+
+	uint64_t tms;
+	memcpy(&tms, &uuid->data[0], 6);
+	tms = pg_ntoh64(tms) >> 16;
+	tms = (tms - EPOCH_DIFF_MS) * 1000;
+
+	PG_RETURN_TIMESTAMPTZ(tms);
 }
