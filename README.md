@@ -49,7 +49,7 @@ directory
 ```sh
 # example shell script to install pg_uuidv7
 cd "$(mktemp -d)"
-curl -LO "https://github.com/fboulnois/pg_uuidv7/releases/download/v1.1.0/{pg_uuidv7.tar.gz,SHA256SUMS}"
+curl -LO "https://github.com/fboulnois/pg_uuidv7/releases/download/v1.1.1/{pg_uuidv7.tar.gz,SHA256SUMS}"
 tar xf pg_uuidv7.tar.gz
 sha256sum -c SHA256SUMS
 cp pg_uuidv7.so "$(pg_config --pkglibdir)"

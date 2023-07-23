@@ -1,5 +1,11 @@
 # Changelog
 
+## [v1.1.1](https://github.com/fboulnois/pg_uuidv7/compare/v1.1.0...v1.1.1) - 2023-07-23
+
+### Changed
+
+* Simplify timestamp extraction
+
 ## [v1.1.0](https://github.com/fboulnois/pg_uuidv7/compare/v1.0.2...v1.1.0) - 2023-07-22
 
 ### Added
