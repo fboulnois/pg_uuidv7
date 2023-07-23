@@ -15,8 +15,18 @@ SELECT uuid_generate_v7();
 (1 row)
 ```
 
-This extension is nearly as fast as the native `gen_random_uuid()` function.
-See the [benchmarks](BENCHMARKS.md) for more details.
+The timestamp component of these UUIDs can also be extracted:
+
+```
+SELECT uuid_v7_to_timestamptz('018570bb-4a7d-7c7e-8df4-6d47afd8c8fc');
+   uuid_v7_to_timestamptz
+----------------------------
+ 2023-01-02 04:26:40.637+00
+(1 row)
+```
+
+`uuid_generate_v7()` is nearly as fast as the native `gen_random_uuid()`
+function. See the [benchmarks](BENCHMARKS.md) for more details.
 
 ## Background
 
