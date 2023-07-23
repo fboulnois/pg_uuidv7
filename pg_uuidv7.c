@@ -8,9 +8,9 @@
 #include <time.h>
 
 /*
- * Number of milliseconds between unix and postgres epoch
+ * Number of microseconds between unix and postgres epoch
  */
-#define EPOCH_DIFF_MS ((POSTGRES_EPOCH_JDATE - UNIX_EPOCH_JDATE) * USECS_PER_DAY / 1000)
+#define EPOCH_DIFF_USECS ((POSTGRES_EPOCH_JDATE - UNIX_EPOCH_JDATE) * USECS_PER_DAY)
 
 PG_MODULE_MAGIC;
 
@@ -54,11 +54,11 @@ PG_FUNCTION_INFO_V1(uuid_v7_to_timestamptz);
 Datum uuid_v7_to_timestamptz(PG_FUNCTION_ARGS)
 {
 	pg_uuid_t *uuid = PG_GETARG_UUID_P(0);
+	uint64_t ts;
 
-	uint64_t tms;
-	memcpy(&tms, &uuid->data[0], 6);
-	tms = pg_ntoh64(tms) >> 16;
-	tms = (tms - EPOCH_DIFF_MS) * 1000;
+	memcpy(&ts, &uuid->data[0], 6);
+	ts = pg_ntoh64(ts) >> 16;
+	ts = 1000 * ts - EPOCH_DIFF_USECS;
 
-	PG_RETURN_TIMESTAMPTZ(tms);
+	PG_RETURN_TIMESTAMPTZ(ts);
 }
