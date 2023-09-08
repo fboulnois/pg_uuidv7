@@ -6,7 +6,7 @@ in Postgres.
 These are regular Postgres UUIDs, so they can be used as primary keys, converted
 to and from strings, included in indexes, etc:
 
-```
+```sql
 SELECT uuid_generate_v7();
 
            uuid_generate_v7           
@@ -15,13 +15,30 @@ SELECT uuid_generate_v7();
 (1 row)
 ```
 
-The timestamp component of these UUIDs can also be extracted:
+The timestamp component of these UUIDs can be extracted:
 
-```
+```sql
 SELECT uuid_v7_to_timestamptz('018570bb-4a7d-7c7e-8df4-6d47afd8c8fc');
    uuid_v7_to_timestamptz
 ----------------------------
  2023-01-02 04:26:40.637+00
+(1 row)
+```
+
+Timestamps can be converted to v7 UUIDs:
+
+```sql
+SELECT uuid_timestamptz_to_v7('2023-01-02 04:26:40.637+00');
+        uuid_timestamptz_to_v7
+--------------------------------------
+ 018570bb-4a7d-7630-a5c4-89b795024c5d
+(1 row)
+
+-- for date range queries set the second argument to true to zero the random bits
+SELECT uuid_timestamptz_to_v7('2023-01-02 04:26:40.637+00', true);
+        uuid_timestamptz_to_v7
+--------------------------------------
+ 018570bb-4a7d-7000-8000-000000000000
 (1 row)
 ```
 
