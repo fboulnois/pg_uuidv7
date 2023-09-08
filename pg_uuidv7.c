@@ -62,3 +62,37 @@ Datum uuid_v7_to_timestamptz(PG_FUNCTION_ARGS)
 
 	PG_RETURN_TIMESTAMPTZ(ts);
 }
+
+PG_FUNCTION_INFO_V1(uuid_timestamptz_to_v7);
+
+Datum uuid_timestamptz_to_v7(PG_FUNCTION_ARGS)
+{
+	pg_uuid_t *uuid = palloc(UUID_LEN);
+	bool zero = false;
+	uint64_t tms;
+
+	TimestampTz ts = PG_GETARG_TIMESTAMPTZ(0);
+
+	if (!PG_ARGISNULL(1))
+		zero = PG_GETARG_BOOL(1);
+
+	if (zero)
+		memset(uuid, 0, UUID_LEN);
+	else if (!pg_strong_random(uuid, UUID_LEN))
+		ereport(ERROR,
+				(errcode(ERRCODE_INTERNAL_ERROR),
+				 errmsg("could not generate random values")));
+
+	tms = ((uint64_t)ts + EPOCH_DIFF_USECS) / 1000;
+	tms = pg_hton64(tms << 16);
+	memcpy(&uuid->data[0], &tms, 6);
+
+	/*
+	 * Set magic numbers for a "version 7" UUID, see
+	 * https://www.ietf.org/archive/id/draft-ietf-uuidrev-rfc4122bis-00.html#name-uuid-version-7
+	 */
+	uuid->data[6] = (uuid->data[6] & 0x0f) | 0x70; /* 4 bit version [0111] */
+	uuid->data[8] = (uuid->data[8] & 0x3f) | 0x80; /* 2 bit variant [10]   */
+
+	PG_RETURN_UUID_P(uuid);
+}
