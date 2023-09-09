@@ -1,5 +1,12 @@
 # Changelog
 
+## [v1.2.0](https://github.com/fboulnois/pg_uuidv7/compare/v1.1.1...v1.2.0) - 2023-09-09
+
+### Added
+
+* Bump extension version to 1.2.0
+* Build v7 uuid from timestamp
+
 ## [v1.1.1](https://github.com/fboulnois/pg_uuidv7/compare/v1.1.0...v1.1.1) - 2023-07-23
 
 ### Changed
