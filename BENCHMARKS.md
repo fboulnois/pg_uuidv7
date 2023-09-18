@@ -30,9 +30,9 @@ maximum number of tries: 1
 number of transactions per client: 200000
 number of transactions actually processed: 1600000/1600000
 number of failed transactions: 0 (0.000%)
-latency average = 0.096 ms
-initial connection time = 6.653 ms
-tps = 83478.089558 (without initial connection time)
+latency average = 0.076 ms
+initial connection time = 5.039 ms
+tps = 105898.857590 (without initial connection time)
 
 -- pg_uuidv7 C extension
 scaling factor: 1
@@ -43,11 +43,11 @@ maximum number of tries: 1
 number of transactions per client: 200000
 number of transactions actually processed: 1600000/1600000
 number of failed transactions: 0 (0.000%)
-latency average = 0.098 ms
-initial connection time = 6.908 ms
-tps = 81562.002058 (without initial connection time)
+latency average = 0.076 ms
+initial connection time = 4.553 ms
+tps = 104904.866366 (without initial connection time)
 
--- sql function r18
+-- sql function r24
 scaling factor: 1
 query mode: simple
 number of clients: 8
@@ -56,7 +56,7 @@ maximum number of tries: 1
 number of transactions per client: 200000
 number of transactions actually processed: 1600000/1600000
 number of failed transactions: 0 (0.000%)
-latency average = 0.123 ms
-initial connection time = 7.602 ms
-tps = 65269.760532 (without initial connection time)
+latency average = 0.089 ms
+initial connection time = 4.965 ms
+tps = 89461.762254 (without initial connection time)
 ```
