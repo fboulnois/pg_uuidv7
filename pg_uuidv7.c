@@ -22,11 +22,6 @@ Datum uuid_generate_v7(PG_FUNCTION_ARGS)
 	struct timespec ts;
 	uint64_t tms;
 
-	if (!pg_strong_random(uuid, UUID_LEN))
-		ereport(ERROR,
-				(errcode(ERRCODE_INTERNAL_ERROR),
-				 errmsg("could not generate random values")));
-
 	/*
 	 * Set first 48 bits to unix epoch timestamp
 	 */
@@ -38,6 +33,11 @@ Datum uuid_generate_v7(PG_FUNCTION_ARGS)
 	tms = ((uint64_t)ts.tv_sec * 1000) + ((uint64_t)ts.tv_nsec / 1000000);
 	tms = pg_hton64(tms << 16);
 	memcpy(&uuid->data[0], &tms, 6);
+
+	if (!pg_strong_random(&uuid->data[6], UUID_LEN - 6))
+		ereport(ERROR,
+				(errcode(ERRCODE_INTERNAL_ERROR),
+				 errmsg("could not generate random values")));
 
 	/*
 	 * Set magic numbers for a "version 7" UUID, see
@@ -76,16 +76,16 @@ Datum uuid_timestamptz_to_v7(PG_FUNCTION_ARGS)
 	if (!PG_ARGISNULL(1))
 		zero = PG_GETARG_BOOL(1);
 
-	if (zero)
-		memset(uuid, 0, UUID_LEN);
-	else if (!pg_strong_random(uuid, UUID_LEN))
-		ereport(ERROR,
-				(errcode(ERRCODE_INTERNAL_ERROR),
-				 errmsg("could not generate random values")));
-
 	tms = ((uint64_t)ts + EPOCH_DIFF_USECS) / 1000;
 	tms = pg_hton64(tms << 16);
 	memcpy(&uuid->data[0], &tms, 6);
+
+	if (zero)
+		memset(&uuid->data[6], 0, UUID_LEN - 6);
+	else if (!pg_strong_random(&uuid->data[6], UUID_LEN - 6))
+		ereport(ERROR,
+				(errcode(ERRCODE_INTERNAL_ERROR),
+				 errmsg("could not generate random values")));
 
 	/*
 	 * Set magic numbers for a "version 7" UUID, see
