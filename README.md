@@ -58,7 +58,7 @@ can be created in parallel in a distributed system.
 1. Download the [latest `.tar.gz` release](https://github.com/fboulnois/pg_uuidv7/releases)
 and extract it to a temporary directory
 2. Copy `pg_uuidv7.so` into the Postgres module directory
-3. Copy `pg_uuidv7.control` and `pg_uuidv7--1.2.sql` into the Postgres extension
+3. Copy `pg_uuidv7--1.2.sql` and `pg_uuidv7.control` into the Postgres extension
 directory
 4. Enable the extension in the database using `CREATE EXTENSION pg_uuidv7;`
 
@@ -69,7 +69,7 @@ curl -LO "https://github.com/fboulnois/pg_uuidv7/releases/download/v1.2.0/{pg_uu
 tar xf pg_uuidv7.tar.gz
 sha256sum -c SHA256SUMS
 cp pg_uuidv7.so "$(pg_config --pkglibdir)"
-cp pg_uuidv7--1.2.sql pg_uuidv7.control "$(pg_config --sharedir)/extension"
+cp sql/pg_uuidv7--1.2.sql pg_uuidv7.control "$(pg_config --sharedir)/extension"
 psql -c "CREATE EXTENSION pg_uuidv7;"
 ```
 

@@ -7,7 +7,7 @@
   "provides": {
     "pg_uuidv7": {
       "abstract": "Create UUIDv7 values in Postgres",
-      "file": "pg_uuidv7--1.2.sql",
+      "file": "sql/pg_uuidv7--1.2.sql",
       "docfile": "README.md",
       "version": "1.2.0"
     }
