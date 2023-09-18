@@ -60,8 +60,7 @@ and extract it to a temporary directory
 2. Copy `pg_uuidv7.so` into the Postgres module directory
 3. Copy `pg_uuidv7.control` and `pg_uuidv7--1.2.sql` into the Postgres extension
 directory
-4. Add `pg_uuidv7` to the `shared_preload_libraries` setting in `postgresql.conf`
-5. Enable the extension in the database using `CREATE EXTENSION pg_uuidv7;`
+4. Enable the extension in the database using `CREATE EXTENSION pg_uuidv7;`
 
 ```sh
 # example shell script to install pg_uuidv7
@@ -71,7 +70,6 @@ tar xf pg_uuidv7.tar.gz
 sha256sum -c SHA256SUMS
 cp pg_uuidv7.so "$(pg_config --pkglibdir)"
 cp pg_uuidv7--1.2.sql pg_uuidv7.control "$(pg_config --sharedir)/extension"
-pg_conftool set shared_preload_libraries "pg_uuidv7"
 psql -c "CREATE EXTENSION pg_uuidv7;"
 ```
 
