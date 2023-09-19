@@ -1,5 +1,21 @@
 # Changelog
 
+## [v1.3.0](https://github.com/fboulnois/pg_uuidv7/compare/v1.2.0...v1.3.0) - 2023-09-18
+
+### Added
+
+* Bump extension metadata to 1.3.0
+* Build extension for Postgres 13 and later
+* Add Postgres 16 to test matrix
+* Update Dockerfile to use Postgres 16
+* Add Dockerfile to test and benchmark extension
+* Add unit tests for pg_uuidv7
+
+### Changed
+
+* Add uuidv7 data sequentially
+* Move extension sql into own directory
+
 ## [v1.2.0](https://github.com/fboulnois/pg_uuidv7/compare/v1.1.1...v1.2.0) - 2023-09-09
 
 ### Added
