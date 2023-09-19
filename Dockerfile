@@ -6,7 +6,8 @@ RUN apt-get update && apt-get -y upgrade \
 WORKDIR /srv
 COPY . /srv
 
-RUN make
+RUN for v in `seq 13 16`; do pg_buildext build-$v $v; done
 
-RUN tar -czvf pg_uuidv7.tar.gz sql/pg_uuidv7--1.2.sql pg_uuidv7.control pg_uuidv7.so \
-  && sha256sum sql/pg_uuidv7--1.2.sql pg_uuidv7.control pg_uuidv7.so pg_uuidv7.tar.gz > SHA256SUMS
+RUN TARGETS=$(find * -name pg_uuidv7.so) \
+  && tar -czvf pg_uuidv7.tar.gz $TARGETS sql/pg_uuidv7--1.2.sql pg_uuidv7.control \
+  && sha256sum pg_uuidv7.tar.gz $TARGETS sql/pg_uuidv7--1.2.sql pg_uuidv7.control > SHA256SUMS
