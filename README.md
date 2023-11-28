@@ -71,7 +71,7 @@ tar xf pg_uuidv7.tar.gz
 sha256sum -c SHA256SUMS
 PG_MAJOR=$(pg_config --version | sed 's/^.* \([0-9]\{1,\}\).*$/\1/')
 cp "$PG_MAJOR/pg_uuidv7.so" "$(pg_config --pkglibdir)"
-cp sql/pg_uuidv7--1.3.sql pg_uuidv7.control "$(pg_config --sharedir)/extension"
+cp pg_uuidv7--1.3.sql pg_uuidv7.control "$(pg_config --sharedir)/extension"
 psql -c "CREATE EXTENSION pg_uuidv7;"
 ```
 
