@@ -8,6 +8,6 @@ COPY . /srv
 
 RUN for v in `seq 13 16`; do pg_buildext build-$v $v; done
 
-RUN TARGETS=$(find * -name pg_uuidv7.so) \
-  && tar -czvf pg_uuidv7.tar.gz $TARGETS sql/pg_uuidv7--1.3.sql pg_uuidv7.control \
-  && sha256sum pg_uuidv7.tar.gz $TARGETS sql/pg_uuidv7--1.3.sql pg_uuidv7.control > SHA256SUMS
+RUN cp sql/pg_uuidv7--1.3.sql . && TARGETS=$(find * -name pg_uuidv7.so) \
+  && tar -czvf pg_uuidv7.tar.gz $TARGETS pg_uuidv7--1.3.sql pg_uuidv7.control \
+  && sha256sum pg_uuidv7.tar.gz $TARGETS pg_uuidv7--1.3.sql pg_uuidv7.control > SHA256SUMS
