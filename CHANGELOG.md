@@ -1,6 +1,17 @@
 # Changelog
 
-## [v1.3.0](https://github.com/fboulnois/pg_uuidv7/compare/v1.2.0...v1.3.0) - 2023-09-18
+## [v1.4.0](https://github.com/fboulnois/pg_uuidv7/compare/v1.3.0...v1.4.0) - 2023-11-28
+
+### Added
+
+* Bump extension metadata to 1.4.0
+* Run postgres with pg_uuidv7 extension
+
+### Changed
+
+* Move sql to top level to simplify install
+
+## [v1.3.0](https://github.com/fboulnois/pg_uuidv7/compare/v1.2.0...v1.3.0) - 2023-09-19
 
 ### Added
 
