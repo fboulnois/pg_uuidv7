@@ -1,7 +1,7 @@
 {
   "name": "pg_uuidv7",
   "abstract": "Create UUIDv7 values in Postgres",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "maintainer": "fboulnois <fboulnois@users.noreply.github.com>",
   "license": "open_source",
   "provides": {
@@ -9,7 +9,7 @@
       "abstract": "Create UUIDv7 values in Postgres",
       "file": "sql/pg_uuidv7--1.4.sql",
       "docfile": "README.md",
-      "version": "1.4.0"
+      "version": "1.4.1"
     }
   },
   "resources": {

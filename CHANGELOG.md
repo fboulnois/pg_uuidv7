@@ -1,5 +1,11 @@
 # Changelog
 
+## [v1.4.1](https://github.com/fboulnois/pg_uuidv7/compare/v1.4.0...v1.4.1) - 2023-12-15
+
+### Fixed
+
+* Split into build and deploy stages
+
 ## [v1.4.0](https://github.com/fboulnois/pg_uuidv7/compare/v1.3.0...v1.4.0) - 2023-11-28
 
 ### Added
