@@ -93,3 +93,16 @@ Postgres Docker image:
 ```sh
 docker build . --tag pg_uuidv7
 ```
+
+## Test
+
+A separate [`Dockerfile`](test/Dockerfile) is available to build the extension
+against a specific version of Postgres and run the regression tests:
+
+```sh
+docker build . --file test/Dockerfile --tag pgxn-test
+docker run --rm -it pgxn-test /bin/sh
+# once in container
+pg-start 16
+pg-build-test
+```
