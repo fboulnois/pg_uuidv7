@@ -106,3 +106,9 @@ docker run --rm -it pgxn-test /bin/sh
 pg-start 16
 pg-build-test
 ```
+
+## Contributing
+
+See the [CONTRIBUTING.md](CONTRIBUTING.md) file for more details. In short,
+follow the style guidelines, agree to the Developer Certificate of Origin, and
+submit a PR.
