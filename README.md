@@ -55,6 +55,9 @@ can be created in parallel in a distributed system.
 
 ## Quickstart
 
+> These instructions are for x86_64 Linux. On other architectures follow the
+[build instructions](#build) instead.
+
 1. Download the [latest `.tar.gz` release](https://github.com/fboulnois/pg_uuidv7/releases)
 and extract it to a temporary directory
 2. Copy `pg_uuidv7.so` for your Postgres version into the Postgres module
@@ -83,7 +86,7 @@ psql -c "CREATE EXTENSION pg_uuidv7;"
 build the code. On Debian, these headers are included in the `libpq-dev` and
 `postgresql-server-dev-all` packages.
 
-To build the code run `make`.
+To build the code run `make`. To install the extension locally run `make install`.
 
 ### Build using Docker
 
