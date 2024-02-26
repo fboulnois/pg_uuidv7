@@ -18,7 +18,7 @@ RUN cp sql/pg_uuidv7--1.4.sql . && TARGETS=$(find * -name pg_uuidv7.so) \
 FROM postgres:16 AS env-deploy
 
 # copy tarball and checksums
-COPY --from=0 /srv/pg_uuidv7.tar.gz /srv/SHA256SUMS /srv
+COPY --from=0 /srv/pg_uuidv7.tar.gz /srv/SHA256SUMS /srv/
 
 # add extension to postgres
 COPY --from=0 /srv/${PG_MAJOR}/pg_uuidv7.so /usr/lib/postgresql/${PG_MAJOR}/lib
