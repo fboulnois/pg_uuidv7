@@ -24,3 +24,6 @@ COPY --from=0 /srv/pg_uuidv7.tar.gz /srv/SHA256SUMS /srv
 COPY --from=0 /srv/${PG_MAJOR}/pg_uuidv7.so /usr/lib/postgresql/${PG_MAJOR}/lib
 COPY --from=0 /srv/pg_uuidv7.control /usr/share/postgresql/${PG_MAJOR}/extension
 COPY --from=0 /srv/pg_uuidv7--1.4.sql /usr/share/postgresql/${PG_MAJOR}/extension
+
+# install extension
+COPY ./sql/install-extensions.sql /docker-entrypoint-initdb.d
