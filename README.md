@@ -62,19 +62,19 @@ can be created in parallel in a distributed system.
 and extract it to a temporary directory
 2. Copy `pg_uuidv7.so` for your Postgres version into the Postgres module
 directory
-3. Copy `pg_uuidv7--1.4.sql` and `pg_uuidv7.control` into the Postgres extension
+3. Copy `pg_uuidv7--1.5.sql` and `pg_uuidv7.control` into the Postgres extension
 directory
 4. Enable the extension in the database using `CREATE EXTENSION pg_uuidv7;`
 
 ```sh
 # example shell script to install pg_uuidv7
 cd "$(mktemp -d)"
-curl -LO "https://github.com/fboulnois/pg_uuidv7/releases/download/v1.4.1/{pg_uuidv7.tar.gz,SHA256SUMS}"
+curl -LO "https://github.com/fboulnois/pg_uuidv7/releases/download/v1.5.0/{pg_uuidv7.tar.gz,SHA256SUMS}"
 tar xf pg_uuidv7.tar.gz
 sha256sum -c SHA256SUMS
 PG_MAJOR=$(pg_config --version | sed 's/^.* \([0-9]\{1,\}\).*$/\1/')
 cp "$PG_MAJOR/pg_uuidv7.so" "$(pg_config --pkglibdir)"
-cp pg_uuidv7--1.4.sql pg_uuidv7.control "$(pg_config --sharedir)/extension"
+cp pg_uuidv7--1.5.sql pg_uuidv7.control "$(pg_config --sharedir)/extension"
 psql -c "CREATE EXTENSION pg_uuidv7;"
 ```
 
