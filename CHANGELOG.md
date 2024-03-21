@@ -1,5 +1,20 @@
 # Changelog
 
+## [v1.5.0](https://github.com/fboulnois/pg_uuidv7/compare/v1.4.1...v1.5.0) - 2024-03-21
+
+### Added
+
+* Bump extension metadata to 1.5.0
+* Automatically publish new versions
+
+### Changed
+
+* Mark timestamp functions as stable
+
+### Fixed
+
+* Destination must be a directory ending in /
+
 ## [v1.4.1](https://github.com/fboulnois/pg_uuidv7/compare/v1.4.0...v1.4.1) - 2023-12-15
 
 ### Fixed
