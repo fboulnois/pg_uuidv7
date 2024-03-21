@@ -97,6 +97,16 @@ Postgres Docker image:
 docker build . --tag pg_uuidv7
 ```
 
+A prebuilt x86_64 version of this image is on GitHub:
+
+```sh
+docker pull ghcr.io/fboulnois/pg_uuidv7:1.5.0
+```
+
+The prebuilt image [is similar](https://github.com/fboulnois/pg_uuidv7/pull/29#issuecomment-1996102946)
+to a vanilla Postgres instance so the extension needs to be enabled manually or
+with an initialization script with `CREATE EXTENSION pg_uuidv7;`.
+
 ## Test
 
 A separate [`Dockerfile`](test/Dockerfile) is available to build the extension
