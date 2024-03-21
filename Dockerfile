@@ -11,9 +11,9 @@ COPY . /srv
 RUN for v in `seq 13 16`; do pg_buildext build-$v $v; done
 
 # create tarball and checksums
-RUN cp sql/pg_uuidv7--1.4.sql . && TARGETS=$(find * -name pg_uuidv7.so) \
-  && tar -czvf pg_uuidv7.tar.gz $TARGETS pg_uuidv7--1.4.sql pg_uuidv7.control \
-  && sha256sum pg_uuidv7.tar.gz $TARGETS pg_uuidv7--1.4.sql pg_uuidv7.control > SHA256SUMS
+RUN cp sql/pg_uuidv7--1.5.sql . && TARGETS=$(find * -name pg_uuidv7.so) \
+  && tar -czvf pg_uuidv7.tar.gz $TARGETS pg_uuidv7--1.5.sql pg_uuidv7.control \
+  && sha256sum pg_uuidv7.tar.gz $TARGETS pg_uuidv7--1.5.sql pg_uuidv7.control > SHA256SUMS
 
 FROM postgres:16 AS env-deploy
 
@@ -23,4 +23,4 @@ COPY --from=0 /srv/pg_uuidv7.tar.gz /srv/SHA256SUMS /srv/
 # add extension to postgres
 COPY --from=0 /srv/${PG_MAJOR}/pg_uuidv7.so /usr/lib/postgresql/${PG_MAJOR}/lib
 COPY --from=0 /srv/pg_uuidv7.control /usr/share/postgresql/${PG_MAJOR}/extension
-COPY --from=0 /srv/pg_uuidv7--1.4.sql /usr/share/postgresql/${PG_MAJOR}/extension
+COPY --from=0 /srv/pg_uuidv7--1.5.sql /usr/share/postgresql/${PG_MAJOR}/extension
