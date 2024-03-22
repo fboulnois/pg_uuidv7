@@ -1,0 +1,4 @@
+# Ignore the MSVC stuff we don't need like build artifacts
+pg_uuidv7/x64
+*.user
+.vs
