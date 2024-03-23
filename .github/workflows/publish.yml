@@ -65,6 +65,16 @@ jobs:
         with:
           context: .
           push: true
+          target: env-deploy
           tags: |
             ghcr.io/${{ github.repository }}:latest
             ghcr.io/${{ github.repository }}:${{ env.BUILD_VERSION }}
+      - name: Build and push tagged Docker image
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          push: true
+          target: extension-deploy
+          tags: |
+            ghcr.io/${{ github.repository }}:latest-extension
+            ghcr.io/${{ github.repository }}:${{ env.BUILD_VERSION }}-extension
