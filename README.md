@@ -55,6 +55,7 @@ can be created in parallel in a distributed system.
 
 ## Quickstart
 
+> [!IMPORTANT]
 > These instructions are for x86_64 Linux. On other architectures follow the
 [build instructions](#build) instead.
 
