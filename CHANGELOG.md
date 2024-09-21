@@ -1,5 +1,11 @@
 # Changelog
 
+## [v1.6.0](https://github.com/fboulnois/pg_uuidv7/compare/v1.5.0...v1.6.0) - 2024-03-21
+
+### Added
+
+* Add conversion to and from timestamp without timezone
+
 ## [v1.5.0](https://github.com/fboulnois/pg_uuidv7/compare/v1.4.1...v1.5.0) - 2024-03-21
 
 ### Added
