@@ -1,4 +1,4 @@
-FROM postgres:16 AS env-build
+FROM postgres:17 AS env-build
 
 # install build dependencies
 RUN apt-get update && apt-get -y upgrade \
@@ -8,14 +8,14 @@ WORKDIR /srv
 COPY . /srv
 
 # build extension for all supported versions
-RUN for v in `seq 13 16`; do pg_buildext build-$v $v; done
+RUN for v in `seq 13 17`; do pg_buildext build-$v $v; done
 
 # create tarball and checksums
 RUN cp sql/pg_uuidv7--1.5.sql . && TARGETS=$(find * -name pg_uuidv7.so) \
   && tar -czvf pg_uuidv7.tar.gz $TARGETS pg_uuidv7--1.5.sql pg_uuidv7.control \
   && sha256sum pg_uuidv7.tar.gz $TARGETS pg_uuidv7--1.5.sql pg_uuidv7.control > SHA256SUMS
 
-FROM postgres:16 AS env-deploy
+FROM postgres:17 AS env-deploy
 
 # copy tarball and checksums
 COPY --from=0 /srv/pg_uuidv7.tar.gz /srv/SHA256SUMS /srv/
