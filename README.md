@@ -56,8 +56,8 @@ can be created in parallel in a distributed system.
 ## Quickstart
 
 > [!IMPORTANT]
-> These instructions are for x86_64 Linux. On other architectures follow the
-[build instructions](#build) instead.
+> These instructions are for x86_64 Linux. On other architectures (e.g. Apple
+M1, Raspberry Pi, etc.) follow the [build instructions](#build) instead.
 
 1. Download the [latest `.tar.gz` release](https://github.com/fboulnois/pg_uuidv7/releases)
 and extract it to a temporary directory
