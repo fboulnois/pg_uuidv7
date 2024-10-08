@@ -1,5 +1,16 @@
 # Changelog
 
+## [v1.6.0](https://github.com/fboulnois/pg_uuidv7/compare/v1.5.0...v1.6.0) - 2024-10-08
+
+### Added
+
+* Bump extension metadata to 1.6.0
+* Publish new versions to GitHub
+* Add Postgres 17 to test matrix
+* Update Dockerfile to use Postgres 17
+* Add tests for new timestamp conversions
+* Add timestamp conversion functions
+
 ## [v1.5.0](https://github.com/fboulnois/pg_uuidv7/compare/v1.4.1...v1.5.0) - 2024-03-21
 
 ### Added
