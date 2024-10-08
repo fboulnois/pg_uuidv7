@@ -117,7 +117,7 @@ against a specific version of Postgres and run the regression tests:
 docker build . --file test/Dockerfile --tag pgxn-test
 docker run --rm -it pgxn-test /bin/sh
 # once in container
-pg-start 16
+pg-start 17
 pg-build-test
 ```
 
