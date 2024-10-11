@@ -42,8 +42,8 @@ SELECT uuid_timestamptz_to_v7('2023-01-02 04:26:40.637+00', true);
 (1 row)
 ```
 
-`uuid_generate_v7()` is nearly as fast as the native `gen_random_uuid()`
-function. See the [benchmarks](BENCHMARKS.md) for more details.
+`uuid_generate_v7()` is as fast as the native `gen_random_uuid()` function. See
+the [benchmarks](BENCHMARKS.md) for more details.
 
 ## Background
 
