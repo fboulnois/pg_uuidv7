@@ -1,5 +1,16 @@
 # Changelog
 
+## [v1.7.0](https://github.com/fboulnois/pg_uuidv7/compare/v1.6.0...v1.7.0) - 2025-10-13
+
+### Added
+
+* Bump extension metadata to 1.7.0
+* Update extension to use Postgres 18
+
+### Fixed
+
+* Allow GitHub releases to be updated
+
 ## [v1.6.0](https://github.com/fboulnois/pg_uuidv7/compare/v1.5.0...v1.6.0) - 2024-10-08
 
 ### Added
