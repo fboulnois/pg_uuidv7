@@ -1,7 +1,11 @@
 # `pg_uuidv7`: Use the new v7 UUIDs in Postgres
 
-A tiny Postgres extension to create valid [version 7 UUIDs](https://www.ietf.org/archive/id/draft-ietf-uuidrev-rfc4122bis-00.html#name-uuid-version-7)
-in Postgres.
+> [!NOTE]
+> As of Postgres 18, there is a built in `uuidv7()` function, however it does
+not include all of the functionality below.
+
+A tiny Postgres extension to create valid [version 7 UUIDs](https://www.rfc-editor.org/rfc/rfc9562.html#name-uuid-version-7)
+in Postgres. Supports Postgres 13 through 18.
 
 These are regular Postgres UUIDs, so they can be used as primary keys, converted
 to and from strings, included in indexes, etc:
@@ -63,19 +67,19 @@ M1, Raspberry Pi, etc.) follow the [build instructions](#build) instead.
 and extract it to a temporary directory
 2. Copy `pg_uuidv7.so` for your Postgres version into the Postgres module
 directory
-3. Copy `pg_uuidv7--1.6.sql` and `pg_uuidv7.control` into the Postgres extension
+3. Copy `pg_uuidv7--1.7.sql` and `pg_uuidv7.control` into the Postgres extension
 directory
 4. Enable the extension in the database using `CREATE EXTENSION pg_uuidv7;`
 
 ```sh
 # example shell script to install pg_uuidv7
 cd "$(mktemp -d)"
-curl -LO "https://github.com/fboulnois/pg_uuidv7/releases/download/v1.6.0/{pg_uuidv7.tar.gz,SHA256SUMS}"
+curl -LO "https://github.com/fboulnois/pg_uuidv7/releases/download/v1.7.0/{pg_uuidv7.tar.gz,SHA256SUMS}"
 tar xf pg_uuidv7.tar.gz
 sha256sum -c SHA256SUMS
 PG_MAJOR=$(pg_config --version | sed 's/^.* \([0-9]\{1,\}\).*$/\1/')
 cp "$PG_MAJOR/pg_uuidv7.so" "$(pg_config --pkglibdir)"
-cp pg_uuidv7--1.6.sql pg_uuidv7.control "$(pg_config --sharedir)/extension"
+cp pg_uuidv7--1.7.sql pg_uuidv7.control "$(pg_config --sharedir)/extension"
 psql -c "CREATE EXTENSION pg_uuidv7;"
 ```
 
@@ -101,7 +105,7 @@ docker build . --tag pg_uuidv7
 A prebuilt x86_64 version of this image is on GitHub:
 
 ```sh
-docker pull ghcr.io/fboulnois/pg_uuidv7:1.6.0
+docker pull ghcr.io/fboulnois/pg_uuidv7:1.7.0
 ```
 
 The prebuilt image [is similar](https://github.com/fboulnois/pg_uuidv7/pull/29#issuecomment-1996102946)
@@ -117,8 +121,11 @@ against a specific version of Postgres and run the regression tests:
 docker build . --file test/Dockerfile --tag pgxn-test
 docker run --rm -it pgxn-test /bin/sh
 # once in container
-pg-start 17
+pg-start 18
 pg-build-test
+# optionally run the benchmarks
+cd test/benchmark
+./benchmark.sh postgres
 ```
 
 ## Contributing
