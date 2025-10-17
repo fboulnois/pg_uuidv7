@@ -11,10 +11,16 @@ VOLATILE STRICT LANGUAGE C PARALLEL SAFE;
 CREATE FUNCTION uuid_v7_to_timestamptz(uuid)
 RETURNS timestamptz
 AS 'MODULE_PATHNAME', 'uuid_v7_to_timestamptz'
-STABLE STRICT LANGUAGE C PARALLEL SAFE;
+IMMUTABLE STRICT LANGUAGE C PARALLEL SAFE;
 
 -- create a v7 uuid from a timestamp
 CREATE FUNCTION uuid_timestamptz_to_v7(timestamptz, zero bool = false)
+RETURNS uuid
+AS 'MODULE_PATHNAME', 'uuid_timestamptz_to_v7'
+IMMUTABLE STRICT LANGUAGE C PARALLEL SAFE;
+
+-- stable version to create a v7 uuid from a timestamp with timezone
+CREATE FUNCTION uuid_timestamptz_to_v7_stable(timestamptz, zero bool = false)
 RETURNS uuid
 AS 'MODULE_PATHNAME', 'uuid_timestamptz_to_v7'
 STABLE STRICT LANGUAGE C PARALLEL SAFE;
