@@ -31,10 +31,32 @@ Datum uuid_generate_v7(PG_FUNCTION_ARGS)
 				 errmsg("could not get CLOCK_REALTIME")));
 
 	tms = ((uint64_t)ts.tv_sec * 1000) + ((uint64_t)ts.tv_nsec / 1000000);
-	tms = pg_hton64(tms << 16);
-	memcpy(&uuid->data[0], &tms, 6);
 
-	if (!pg_strong_random(&uuid->data[6], UUID_LEN - 6))
+	/*
+	 * Generate first 64 bits of UUID
+	 * 48 bits = unix epoch timestamp in milliseconds
+	 *  4 bits = version 7 [0111]
+	 * 12 bits = ~250 nanoseconds precision
+	 *
+	 * Using an OPTIONAL sub-millisecond timestamp fraction (12 bits at maximum) as per Section 6.2 (Method 3).
+	 * https://datatracker.ietf.org/doc/rfc9562/
+	*/
+	tms = pg_hton64(
+	    (tms << 16) |
+	    0x7000 |
+	    /*
+	     * ((((uint64_t)ts.tv_nsec << 12) / 1000000) & 0x0fff) is equivalent to
+	     * ((((uint64_t)ts.tv_nsec % 1000000) * 4096) / 1000000)
+	     * but faster, because it replaces a MOD function with an & operation with the same result.
+	     * (<< 12) is used for a faster 4096 multiplication
+	    */
+	    ((((uint64_t)ts.tv_nsec << 12) / 1000000) & 0x0fff));
+	memcpy(&uuid->data[0], &tms, 8);
+
+	/*
+	 * Generate last 62 random bits
+	*/
+	if (!pg_strong_random(&uuid->data[8], UUID_LEN - 8))
 		ereport(ERROR,
 				(errcode(ERRCODE_INTERNAL_ERROR),
 				 errmsg("could not generate random values")));
@@ -43,7 +65,6 @@ Datum uuid_generate_v7(PG_FUNCTION_ARGS)
 	 * Set magic numbers for a "version 7" UUID, see
 	 * https://www.ietf.org/archive/id/draft-ietf-uuidrev-rfc4122bis-00.html#name-uuid-version-7
 	 */
-	uuid->data[6] = (uuid->data[6] & 0x0f) | 0x70; /* 4 bit version [0111] */
 	uuid->data[8] = (uuid->data[8] & 0x3f) | 0x80; /* 2 bit variant [10]   */
 
 	PG_RETURN_UUID_P(uuid);
