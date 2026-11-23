@@ -1,0 +1,10 @@
+# build artifacts
+*.bc
+*.dylib
+*.o
+*.so
+
+# regression test output
+/results/
+/regression.diffs
+/regression.out
