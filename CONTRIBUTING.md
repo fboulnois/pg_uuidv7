@@ -8,7 +8,7 @@ This project accepts community contributions. In order to contribute, please:
 
 ## Coding Style
 
-Please make sure to follow the general [Postgres coding conventions](https://www.postgresql.org/docs/16/source.html)
+Please make sure to follow the general [Postgres coding conventions](https://www.postgresql.org/docs/19/source.html)
 before submitting a PR.
 
 ## Developer Certificate of Origin
