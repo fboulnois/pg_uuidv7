@@ -41,7 +41,7 @@ Datum uuid_generate_v7(PG_FUNCTION_ARGS)
 
 	/*
 	 * Set magic numbers for a "version 7" UUID, see
-	 * https://www.ietf.org/archive/id/draft-ietf-uuidrev-rfc4122bis-00.html#name-uuid-version-7
+	 * https://www.rfc-editor.org/rfc/rfc9562.html#name-uuid-version-7
 	 */
 	uuid->data[6] = (uuid->data[6] & 0x0f) | 0x70; /* 4 bit version [0111] */
 	uuid->data[8] = (uuid->data[8] & 0x3f) | 0x80; /* 2 bit variant [10]   */
@@ -98,7 +98,7 @@ static Datum uuid_uint64_to_v7(uint64_t ts, bool zero)
 
 	/*
 	 * Set magic numbers for a "version 7" UUID, see
-	 * https://www.ietf.org/archive/id/draft-ietf-uuidrev-rfc4122bis-00.html#name-uuid-version-7
+	 * https://www.rfc-editor.org/rfc/rfc9562.html#name-uuid-version-7
 	 */
 	uuid->data[6] = (uuid->data[6] & 0x0f) | 0x70; /* 4 bit version [0111] */
 	uuid->data[8] = (uuid->data[8] & 0x3f) | 0x80; /* 2 bit variant [10]   */
